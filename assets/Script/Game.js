@@ -48,6 +48,7 @@ cc.Class({
         // for (var i = 0; i < 50; i++) {
         //     console.log(Math.floor(Math.random() * 4));
         // }
+        console.log(this.rubishPrefab);
         this.spawnNewRubish();
     },
     spawnNewRubish() {
@@ -69,7 +70,7 @@ cc.Class({
         // newRubish.setPosition(500, 1000);
         newRubish.type = rubishType;
         newRubish.channel = randChannel;
-        console.log(newRubish);
+        // console.log(newRubish);
 
 
     }
