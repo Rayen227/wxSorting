@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "45953764-a14d-4acf-8b91-f75d3f4543b9",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 144,
+  "height": 135,
+  "platformSettings": {},
+  "subMetas": {
+    "过期药丸": {
+      "ver": "1.0.4",
+      "uuid": "ddb950bb-be4d-44e4-b69e-c6ff9451f3c2",
+      "rawTextureUuid": "45953764-a14d-4acf-8b91-f75d3f4543b9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 144,
+      "height": 135,
+      "rawWidth": 144,
+      "rawHeight": 135,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

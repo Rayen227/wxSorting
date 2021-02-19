@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "452a208f-b3bc-4c59-8cea-555ab5852a4e",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 131,
+  "height": 152,
+  "platformSettings": {},
+  "subMetas": {
+    "香水瓶": {
+      "ver": "1.0.4",
+      "uuid": "df363396-f66c-4c0b-94d1-1c85890b4372",
+      "rawTextureUuid": "452a208f-b3bc-4c59-8cea-555ab5852a4e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 131,
+      "height": 152,
+      "rawWidth": 131,
+      "rawHeight": 152,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
