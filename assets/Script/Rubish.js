@@ -1,10 +1,3 @@
-// Learn cc.Class:
-//  - https://docs.cocos.com/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
@@ -13,6 +6,7 @@ cc.Class({
         channel: 0,
         speed: 0,
         scr: '',
+        rubishAtlas: cc.SpriteAtlas,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -28,6 +22,10 @@ cc.Class({
         this.y0 = 1200;
         var then = this;
 
+
+        // this.Sprite = cc.Sprite;
+        // this.Sprite.spriteFrame = this.rubishAtlas.getSpriteFrame('0_5');
+        // console.log(this);
         this.node.x = this.x0 + this.channel * this.xInte;
         this.node.y = this.y0;
         var touchStart;
@@ -55,11 +53,11 @@ cc.Class({
 
     toRightAction() {
         if (this.node.position.x >= this.x0 + 3 * this.xInte) return null;
-        return cc.moveBy(0.5, cc.v2(187.5, 0)).easing(cc.easeCubicActionOut());
+        return cc.moveBy(0.2, cc.v2(187.5, 0)).easing(cc.easeCubicActionOut());
     },
     toLeftAction() {
         if (this.node.x <= this.x0) return null;
-        return cc.moveBy(0.5, cc.v2(-187.5, 0)).easing(cc.easeCubicActionOut());
+        return cc.moveBy(0.2, cc.v2(-187.5, 0)).easing(cc.easeCubicActionOut());
     },
     update() {
 
