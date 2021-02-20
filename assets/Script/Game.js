@@ -7,58 +7,58 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
-        // rubishNode: {
-        //     default: null,
-        //     type: cc.Node
-        // },
         //垃圾桶的引用
         bin: {
             default: null,
             type: cc.Node
         },
-        rubishNode: {
-            default: null,
-            type: cc.Node
-        }
+        rubishAtlas: cc.SpriteAtlas,
 
     },
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        // this.binY = this.bin.y;
-        // for (var i = 0; i < 50; i++) {
-        //     console.log(Math.floor(Math.random() * 4));
-        // }
-        // console.log(this.rubishPrefab);
-        // this.spawnNewRubish();
+
+        var then = this;
+        //生成垃圾的速率(ms)
+        this.rate = 1000;
+        this.score = 0;
+        //score组件
+        this.scoreLabel = cc.find('Canvas/BaseView/Score').getComponent(cc.Label);
+
+        // 初始为0分
+        this.scoreLabel._string = "0";
+        //生成垃圾
         this.spawnARubish();
+        setInterval(function () {
+            then.spawnARubish();
+        }, this.rate);
+
+
     },
     spawnARubish() {
+        //生成节点
+        var rubishNode = cc.instantiate(this.rubishPrefab);
+        //获取Sprite组件
+        var rubishSprite = rubishNode.getComponent(cc.Sprite);
+        //获取prefab组件
+        var Rubish = rubishNode.getComponent("Rubish");
 
-        // 使用给定的模板在场景中生成一个新节点
-        var newRubish = cc.instantiate(this.rubishPrefab);
-        // console.log(this.rubishPrefab);
-        // console.log(newRubish.properties);
-        // 将新增的节点添加到 Canvas 节点下面
-        this.node.addChild(newRubish);
-        // console.log(newRubish);
 
-        //生成参数
-        // var _x = 93.75;
-        // var _y = 1200;
-        // var randChannel = Math.floor(Math.random() * 4);
-        // var randType = Math.floor(Math.random() * 4);
+        //随机生成垃圾资源所在id
+        Rubish.id = Math.floor(Math.random() * 10);
 
-        // 为星星设置一个随机位置
-        // newRubish.setPosition(_x, _y);
-        // console.log(newRubish);
-        // console.log(newRubish.type, newRubish.channel);
-        // newRubish.setPosition(500, 1000);
-        // newRubish.type = randType;
-        // newRubish.channel = randChannel;
-        // newRubish.__proto__.setType(randType);
-        // newRubish.__proto__.setChannel(randChannel);
-    }
+        //根据id设置图片资源
+        rubishSprite.spriteFrame = this.rubishAtlas.getSpriteFrame(Rubish.type + '_' + Rubish.id);
 
-    // update (dt) {},
+
+        this.node.addChild(rubishNode);
+        console.log(Rubish.type, Rubish.channel);
+    },
+
+    update(dt) {
+        // this.scoreLabel._string = this.score.toString();
+        // console.log(this.score.toString());
+        // console.log(this.score, this.scoreLabel._string);
+    },
 });
