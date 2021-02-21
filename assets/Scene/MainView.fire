@@ -171,7 +171,7 @@
       "array": [
         0,
         17.127,
-        400.2841673171984,
+        407.8979651824706,
         0,
         0,
         0,
@@ -764,8 +764,8 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
+      "r": 68,
+      "g": 135,
       "b": 255,
       "a": 255
     },
@@ -849,7 +849,7 @@
     },
     "_enabled": true,
     "rubishPrefab": {
-      "__uuid__": "3a40f166-12c8-417f-9f8a-5750cb385efa"
+      "__uuid__": "a752924e-33f0-4864-8f5b-2be633ec1519"
     },
     "bin": {
       "__id__": 7
@@ -857,6 +857,7 @@
     "rubishAtlas": {
       "__uuid__": "3668fd4e-5609-41af-bbec-40549d7920b6"
     },
+    "gameOverTesting": false,
     "_id": "57vPqcDmxJ+6mroq3IcufM"
   },
   {
