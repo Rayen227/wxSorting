@@ -7,6 +7,11 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+        //引用泡泡破裂帧动画预制
+        burstPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
         //垃圾桶的引用
         bin: {
             default: null,
@@ -19,6 +24,9 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+
+
+        console.log(cc.find('Canvas/BaseView/Bins'));
 
         var then = this;
         //生成垃圾的速率(ms)
@@ -117,6 +125,21 @@ cc.Class({
                     console.log("匹配失败");
                     then.gameOver();
                 }
+
+                //播放动画
+                var burstNode = cc.instantiate(then.burstPrefab);
+                var burstAnim = burstNode.getComponent(cc.Animation);
+                burstAnim.play("Burst");
+                burstNode.x = Rubish.node.x;
+                burstNode.y = Rubish.node.y;
+
+                burstAnim.on('finished', function () {
+                    burstNode.destroy();
+                    burstNode = null;
+                });
+                // console.log(burstNode);
+                then.node.addChild(burstNode);
+
                 Rubish.node.destroy();
                 Rubish = null;
                 //出栈
