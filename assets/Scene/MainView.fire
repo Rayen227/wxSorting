@@ -857,7 +857,7 @@
     "rubishAtlas": {
       "__uuid__": "3668fd4e-5609-41af-bbec-40549d7920b6"
     },
-    "gameOverTesting": false,
+    "gameOverTesting": true,
     "_id": "57vPqcDmxJ+6mroq3IcufM"
   },
   {
