@@ -2,13 +2,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        rubishAtlas: cc.SpriteAtlas,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-
         // v_0 = 200pix/s
         // this.speed = 200;
         // this.type = Math.floor(Math.random() * 4);

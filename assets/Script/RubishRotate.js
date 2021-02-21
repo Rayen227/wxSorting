@@ -29,12 +29,12 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        var rotateDuration = Math.floor(2 + Math.random() * 4);
-        this.node.runAction(
-            cc.repeatForever(
-                cc.rotateBy(rotateDuration, 360)
-            )
-        );
+        // var rotateDuration = Math.floor(2 + Math.random() * 4);
+        // this.node.runAction(
+        //     cc.repeatForever(
+        //         cc.rotateBy(rotateDuration, 360)
+        //     )
+        // );
     },
 
     start() {
