@@ -12,20 +12,25 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
-        //垃圾桶的引用
-        bin: {
+        heartPrefab: {
             default: null,
-            type: cc.Node
+            type: cc.Prefab
         },
         rubishAtlas: cc.SpriteAtlas,
         gameOverTesting: true,
+        wxSubContextView: cc.Node,       //主域视窗容器
+        myAlert: cc.Prefab,
+        restartbtn: cc.Node,
 
     },
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
 
-
+        // 获取授权
+        this.initUserInfoButton();
+        this.wxSubContextView.active = false;
+        this.restartbtn.active = false;
         //生成垃圾的速率(ms)
         this.rate = 2000;
         this.score = 0;
@@ -33,6 +38,7 @@ cc.Class({
         this.rubishX0 = 93.75;
         this.rubishY0 = 1200;
         this.rubishXInte = 187.5;
+
 
         this.rubishStack = new Array();
 
@@ -42,9 +48,12 @@ cc.Class({
         this.Bins = cc.find('Canvas/BaseView/Bins').children;
         // 初始化分数
         this.scoreLabel._string = "0";
+        //爱心
+        this.hearts = [];
 
+        //初始化爱心
+        this.initHearts();
         //生成垃圾
-
         this.rubishesProducer();
 
 
@@ -55,11 +64,22 @@ cc.Class({
 
         if (this.gameOverTesting) return;
 
-        //清除生成函数
+        //清除垃圾生成器
         clearInterval(this.genarating);
         //暂停所有动作
         for (var i = 0; i < this.rubishStack.length; i++) {
             this.rubishStack[i].node.stopAllActions();
+        }
+    },
+
+    initHearts() {
+        var heartCount = 3;
+        for (var i = 0; i < heartCount; i++) {
+            this.hearts[i] = cc.instantiate(this.heartPrefab);
+            console.log(this.hearts[i]);
+            this.hearts[i].x = i * 75 + 250;
+            this.hearts[i].y = 1275;
+            this.node.addChild(this.hearts[i]);
         }
     },
 
@@ -69,8 +89,6 @@ cc.Class({
         var speed = 200;
         var preRate = 5000;
         this.spawnARubish(speed);
-
-
 
         this.genarating = setInterval(producer, this.rate);
 
@@ -186,13 +204,21 @@ cc.Class({
         Rubish.update = function () {
             if (Rubish.node.position.y <= 175) {
                 if (Rubish.type == Rubish.channel) {
-                    console.log("匹配成功");
                     then.score++;
                     // then.score += 10;
                     then.scoreLabel.string = then.score.toString();
                 } else {
-                    console.log("匹配失败");
-                    then.gameOver();
+
+                    then.heart--;
+                    if (then.hearts.length <= 0) {
+                        then.gameOver();
+                        then.createAlert(Rubish.id, Rubish.type);
+                    }
+                    else {
+                        then.hearts.pop().destroy()
+                    }
+
+
                 }
 
                 //播放动画
@@ -241,5 +267,98 @@ cc.Class({
             return 1;
         else
             return 2;
+    },
+
+    //弹出排行榜函数
+    showRanks() {
+        if (typeof wx === 'undefined') {
+            console.log('showRanks')
+            return;
+        }
+        console.log("弹出排行榜函数" + this.score.toString())
+        console.log(this.wxSubContextView.active)
+        if (!this.wxSubContextView.active) {
+            // 设置容器可见
+            this.wxSubContextView.active = true;
+            console.log("弹出排行榜函数" + this.score.toString())
+            // 设置随机数(把这个当做玩家每局结算时的分数)
+            //let score = Math.round(Math.random()*10);
+            let score = this.score;
+            console.log(score);
+            // 发送结算分数到开放域
+            wx.getOpenDataContext().postMessage({
+                message: score
+            });
+        }
+        else {
+            // 设置容器不可见，即关闭排行榜，并让开放域清空排名信息
+            this.wxSubContextView.active = false;
+            wx.getOpenDataContext().postMessage({
+                message: 'clear'
+            });
+        }
+    },
+    initUserInfoButton() {
+        // 微信授权，此代码来自Cocos官方
+        if (typeof wx === 'undefined') {
+            return;
+        }
+
+        let systemInfo = wx.getSystemInfoSync();
+        let width = systemInfo.windowWidth;
+        let height = systemInfo.windowHeight;
+        let button = wx.createUserInfoButton({
+            type: 'text',
+            text: '',
+            style: {
+                left: 0,
+                top: 0,
+                width: width,
+                height: height,
+                lineHeight: 40,
+                backgroundColor: '#00000000',
+                color: '#00000000',
+                textAlign: 'center',
+                fontSize: 10,
+                borderRadius: 4
+            }
+        });
+
+        button.onTap((res) => {
+            if (res.userInfo) {
+                // 可以在这里获取当前玩家的个人信息，如头像、微信名等。
+                console.log('授权成功！');
+            }
+            else {
+                console.log('授权失败！');
+            }
+
+            button.hide();
+            button.destroy();
+        });
+    },
+
+    createAlert: function (id, type) {
+        var node = cc.instantiate(this.myAlert);
+        var spritename = type.toString() + '_' + id.toString();
+        this.node.addChild(node);
+        var myAlert = node.getComponent('alert')
+        console.log(id, type)
+        myAlert.rubish_sprite.spriteFrame = this.rubishAtlas.getSpriteFrame(spritename);
+        var typename = ['干垃圾', '可回收物', '湿垃圾', "有害垃圾"];
+        myAlert.mytip.string = typename[type];
+        this.myAlert.active = true;
+    },
+
+    showrestartbtn() {
+        this.restartbtn.active = true
+    },
+    restartFunction() {
+        this.showRanks();
+        this.restartbtn.active = false
+    },
+    returnIndex() {
+        this.showRanks();
+        this.restartbtn.active = false
     }
 });
