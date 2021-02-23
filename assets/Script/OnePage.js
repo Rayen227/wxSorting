@@ -14,9 +14,9 @@ cc.Class({
     onLoad() {
 
     },
-    //äÖÈ¾µ¥Ò³
+    //ï¿½ï¿½È¾ï¿½ï¿½Ò³
     rendering(type) {
-        var N = 10;//À¬»øµÄÊýÁ¿
+        var N = 10;
         // for (var i = 0; i < 10; i++) {
         //     var name = type + "_" + i;
         //     var rubishNode = new cc.Node(name);
