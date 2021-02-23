@@ -4,10 +4,23 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>btn.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{406,2},{92,94}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{92,94}}</string>
+                <key>sourceSize</key>
+                <string>{92,94}</string>
+            </dict>
             <key>bubble.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{115,115}}</string>
+                <string>{{132,520},{115,115}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -17,10 +30,23 @@
                 <key>sourceSize</key>
                 <string>{115,115}</string>
             </dict>
+            <key>button.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{1000,128}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{4,4},{1000,128}}</string>
+                <key>sourceSize</key>
+                <string>{1008,136}</string>
+            </dict>
             <key>heart.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,119},{43,38}}</string>
+                <string>{{455,96},{43,38}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -30,6 +56,32 @@
                 <key>sourceSize</key>
                 <string>{43,38}</string>
             </dict>
+            <key>panel.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{132,2},{516,272}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{6,6},{516,272}}</string>
+                <key>sourceSize</key>
+                <string>{528,284}</string>
+            </dict>
+            <key>speedUp.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{406,96},{141,47}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{141,47}}</string>
+                <key>sourceSize</key>
+                <string>{141,47}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -38,9 +90,9 @@
             <key>realTextureFileName</key>
             <string>Icons.png</string>
             <key>size</key>
-            <string>{128,256}</string>
+            <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:187723677f3025fb7744110e926e45f3$</string>
+            <string>$TexturePacker:SmartUpdate:fc6152d5f5ffeaaff99cc68912bd586e$</string>
             <key>textureFileName</key>
             <string>Icons.png</string>
         </dict>

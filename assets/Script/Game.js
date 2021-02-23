@@ -17,6 +17,7 @@ cc.Class({
             type: cc.Prefab
         },
         rubishAtlas: cc.SpriteAtlas,
+        iconsAtlas: cc.SpriteAtlas,
         gameOverTesting: true,
         wxSubContextView: cc.Node,       //主域视窗容器
         myAlert: cc.Prefab,
@@ -26,37 +27,43 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-
         // 获取授权
         this.initUserInfoButton();
         this.wxSubContextView.active = false;
         this.restartbtn.active = false;
         //生成垃圾的速率(ms)
-        this.rate = 2000;
+        this.rate = 4000;
         this.score = 0;
         this.playing = true;
         this.rubishX0 = 93.75;
         this.rubishY0 = 1200;
         this.rubishXInte = 187.5;
-
-
         this.rubishStack = new Array();
 
         //score组件
         this.scoreLabel = cc.find('Canvas/BaseView/Score').getComponent(cc.Label);
         //垃圾桶节点数组
         this.Bins = cc.find('Canvas/BaseView/Bins').children;
-        // 初始化分数
+
+        //开始游戏
+        this.gameUp();
+
+    },
+
+    gameUp() {
+
+        for (var i = 0; i < this.rubishStack.length; i++) {
+            this.rubishStack[i].node.destroy();
+        }
+        this.rubishStack = [];
+
         this.scoreLabel._string = "0";
         //爱心
         this.hearts = [];
-
         //初始化爱心
         this.initHearts();
         //生成垃圾
         this.rubishesProducer();
-
-
 
     },
 
@@ -76,7 +83,6 @@ cc.Class({
         var heartCount = 3;
         for (var i = 0; i < heartCount; i++) {
             this.hearts[i] = cc.instantiate(this.heartPrefab);
-            console.log(this.hearts[i]);
             this.hearts[i].x = i * 75 + 250;
             this.hearts[i].y = 1275;
             this.node.addChild(this.hearts[i]);
@@ -87,7 +93,7 @@ cc.Class({
     rubishesProducer() {
         var then = this;
         var speed = 200;
-        var preRate = 5000;
+        var preRate = 4000;
         this.spawnARubish(speed);
 
         this.genarating = setInterval(producer, this.rate);
@@ -96,16 +102,21 @@ cc.Class({
             //Speed is in range 200 to 400
             speed = 200 + then.getLevel() * 50;
             //Rate is in range 1000ms to 4000ms
-            then.rate = 2000 - then.getLevel() * 500;
+            then.rate = 4000 - then.getLevel() * 500;
 
-            // console.log(preRate, then.rate);
+            //加速
             if (preRate > then.rate) {
+
                 preRate = then.rate;
                 clearInterval(then.genarating);
                 then.genarating = setInterval(producer, then.rate);
+                then.movingText(function () {
+                    then.spawnARubish(speed);
+                });
+            } else {
+                then.spawnARubish(speed);
             }
 
-            then.spawnARubish(speed);
         }
     },
 
@@ -253,6 +264,29 @@ cc.Class({
 
     },
 
+    //生成飘过的提示文本
+    movingText(callBack) {
+        var textNode = new cc.Node();
+        textNode.addComponent(cc.Sprite);
+        var textSprite = textNode.getComponent(cc.Sprite);
+        textSprite.spriteFrame = this.iconsAtlas.getSpriteFrame("speedUp");
+        // console.log(textLabel);
+        textNode.x = 750;
+        textNode.y = 1000;
+        textNode.scaleX = 1.5;
+        textNode.scaleY = 1.5;
+        //移动
+        textNode.runAction(
+            cc.sequence(
+                cc.moveBy(1, cc.v2(-textNode.x / 2, 0)),
+                cc.moveBy(1, cc.v2(0, 0)),
+                cc.moveBy(1, cc.v2(-500, 0)),
+                cc.callFunc(callBack)
+            )
+        );
+
+        this.node.addChild(textNode);
+    },
     //分数逻辑函数
     scoreAction() {
     },
@@ -352,10 +386,14 @@ cc.Class({
     },
     restartFunction() {
         this.showRanks();
-        this.restartbtn.active = false
+        this.restartbtn.active = false;
+        this.gameUp();
+        // cc.director.loadScene("Index");
+
     },
     returnIndex() {
         this.showRanks();
         this.restartbtn.active = false
+        cc.director.loadScene("Index");
     }
 });
