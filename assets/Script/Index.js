@@ -15,8 +15,9 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        var onePage = cc.instantiate(this.onePagePrefab);
-        onePage.getComponent("OnePage").rendering(0);
+        // var onePage = cc.instantiate(this.onePagePrefab);
+        // onePage.getComponent("OnePage").rendering(0);
+        // this.node.addChild(onePage);
     },
 
     start() {

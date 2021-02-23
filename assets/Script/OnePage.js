@@ -1,15 +1,12 @@
-// Learn cc.Class:
-//  - https://docs.cocos.com/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
     properties: {
         rubishAtlas: cc.SpriteAtlas,
+        rubishPrefab: {
+            default: null,
+            type: cc.Prefab,
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -17,9 +14,36 @@ cc.Class({
     onLoad() {
 
     },
+    //渲染单页
     rendering(type) {
-        console.log(this.getComponent(cc.Sprite));
-        console.log("rendering")
+        var N = 10;//垃圾的数量
+        // for (var i = 0; i < 10; i++) {
+        //     var name = type + "_" + i;
+        //     var rubishNode = new cc.Node(name);
+        //     this.node.addChild(rubishNode);
+        //     // var rubishNode = cc.Node;
+        //     // console.log(rubishNode);
+        //     rubishNode.addComponent(cc.Sprite);
+        //     var rubishSprite = rubishNode.getComponent(cc.Sprite);
+        //     rubishSprite.spriteFrame = this.rubishAtlas.getSpriteFrame(name);
+        //     rubishNode.x = 100;
+        //     rubishNode.y = 1000;
+
+        //     console.log(rubishSprite);
+        // }
+        var name = "0_0";
+        var rubishNode = new cc.Node(name);
+        this.node.addChild(rubishNode);
+        // var rubishNode = cc.Node;
+        // console.log(rubishNode);
+        rubishNode.addComponent(cc.Sprite);
+        var rubishSprite = rubishNode.getComponent(cc.Sprite);
+        rubishSprite.spriteFrame = this.rubishAtlas.getSpriteFrame(name);
+        rubishNode.x = 100;
+        rubishNode.y = 1000;
+        console.log(rubishNode);
+
+        // console.log(sprite);
     },
     start() {
 
