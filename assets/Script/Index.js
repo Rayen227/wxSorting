@@ -25,45 +25,56 @@ cc.Class({
 
     initUserInfoButton() {
         const _this = this
-        // 微信授权，此代码来自Cocos官方
+        // 微信授权，此代码来自Cocos官方
         if (typeof wx === 'undefined') {
             return;
         }
 
-        let systemInfo = wx.getSystemInfoSync();
-        let width = systemInfo.windowWidth;
-        let height = systemInfo.windowHeight;
-        let button = wx.createUserInfoButton({
-            type: 'text',
-            text: '点击授权',
-            style: {
-                left: 50,
-                top: 300,
-                width: 200,
-                height: 50,
-                lineHeight: 40,
-                backgroundColor: '#00FF00',
-                color: '#FFFFFF ',
-                textAlign: 'center',
-                fontSize: 15,
-                borderRadius: 4
-            }
-        });
+        window.wx.getSetting({
+            success(res) {
+                console.log(res.authSetting);
+                if (res.authSetting["scope.userInfo"]) {
+                    console.log("用户已授权");
+                    _this.startbtn.active = true
+                } else {
+                    console.log("用户未授权");
+                    let systemInfo = wx.getSystemInfoSync();
+                    let width = systemInfo.windowWidth;
+                    let height = systemInfo.windowHeight;
+                    let button = wx.createUserInfoButton({
+                        type: 'text',
+                        text: '点击授权',
+                        style: {
+                            left: 125,
+                            top: 300,
+                            width: 150,
+                            height: 50,
+                            lineHeight: 50,
+                            backgroundColor: '#00B26A',
+                            color: '#FFFFFF ',
+                            textAlign: 'center',
+                            fontSize: 20,
+                            borderRadius: 5
+                        }
+                    });
 
-        button.onTap((res) => {
-            if (res.userInfo) {
-                // 可以在这里获取当前玩家的个人信息，如头像、微信名等。
-                console.log('授权成功！');
-                _this.startbtn.active = true
-                // setTimeout(function () {
-                //     cc.director.loadScene("MainView");
-                //   }, 1000);
+                    button.onTap((res) => {
+                        if (res.userInfo) {
+                            // 可以在这里获取当前玩家的个人信息，如头像、微信名等。
+                            console.log('授权成功！');
+                            _this.startbtn.active = true
+                            // setTimeout(function () {
+                            //     cc.director.loadScene("MainView");
+                            //   }, 1000);
+                        }
+                        else {
+                            console.log('授权失败！');
+                        }
+                        button.hide();
+                        button.destroy();
+                    });
+                }
             }
-            else {
-                console.log('授权失败！');
-            }
-            button.hide();
-            button.destroy();
         });
     },
     //弹出排行榜函数

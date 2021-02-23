@@ -1,7 +1,7 @@
 {
-    "appid": "wxd02cdcf992e8698d",
-    "orientation": "portrait",
-    "separate_engine": false,
-    "REMOTE_SERVER_ROOT": "",
-    "subContext": "OpenDataDomain"
+  "appid": "wxd02cdcf992e8698d",
+  "orientation": "portrait",
+  "separate_engine": false,
+  "REMOTE_SERVER_ROOT": "",
+  "subContext": "OpenDataDomain"
 }

@@ -41,7 +41,8 @@ cc.Class({
         this.rubishStack = new Array();
 
         //score组件
-        this.scoreLabel = cc.find('Canvas/BaseView/Score').getComponent(cc.Label);
+        this.scoreNode = cc.find('Canvas/BaseView/Score');
+        this.scoreLabel = this.scoreNode.getComponent(cc.Label);
         //垃圾桶节点数组
         this.Bins = cc.find('Canvas/BaseView/Bins').children;
 
@@ -53,11 +54,13 @@ cc.Class({
     gameUp() {
 
         for (var i = 0; i < this.rubishStack.length; i++) {
-            this.rubishStack[i].node.destroy();
+            if (this.rubishStack[i] && this.rubishStack[i].node)
+                this.rubishStack[i].node.destroy();
         }
         this.rubishStack = [];
 
-        this.scoreLabel._string = "0";
+        this.scoreLabel.string = "0";
+        this.score = 0;
         //爱心
         this.hearts = [];
         //初始化爱心
@@ -75,7 +78,8 @@ cc.Class({
         clearInterval(this.genarating);
         //暂停所有动作
         for (var i = 0; i < this.rubishStack.length; i++) {
-            this.rubishStack[i].node.stopAllActions();
+            if (this.rubishStack[i] && this.rubishStack[i].node)
+                this.rubishStack[i].node.stopAllActions();
         }
     },
 
@@ -101,17 +105,18 @@ cc.Class({
         function producer() {
             //Speed is in range 200 to 400
             speed = 200 + then.getLevel() * 50;
-            //Rate is in range 1000ms to 4000ms
-            then.rate = 4000 - then.getLevel() * 500;
+            //Rate is in range 2000ms to 4000ms
+            then.rate = 4000 - then.getLevel() * 1000;
 
             //加速
             if (preRate > then.rate) {
 
                 preRate = then.rate;
                 clearInterval(then.genarating);
-                then.genarating = setInterval(producer, then.rate);
+
                 then.movingText(function () {
                     then.spawnARubish(speed);
+                    then.genarating = setInterval(producer, then.rate);
                 });
             } else {
                 then.spawnARubish(speed);
@@ -216,8 +221,14 @@ cc.Class({
             if (Rubish.node.position.y <= 175) {
                 if (Rubish.type == Rubish.channel) {
                     then.score++;
-                    // then.score += 10;
                     then.scoreLabel.string = then.score.toString();
+
+                    then.scoreNode.color = new cc.color(
+                        Math.floor(Math.random() * 150),
+                        Math.floor(Math.random() * 150),
+                        Math.floor(Math.random() * 150),
+                    );
+
                 } else {
 
                     then.heart--;
@@ -225,7 +236,9 @@ cc.Class({
                         then.gameOver();
                         then.createAlert(Rubish.id, Rubish.type);
                     }
-                    then.hearts.pop().destroy();
+                    var heart = then.hearts.pop();
+                    if (heart)
+                        heart.destroy();
 
                 }
 
@@ -254,7 +267,9 @@ cc.Class({
         //根据id设置图片资源
         rubishSprite.spriteFrame = this.rubishAtlas.getSpriteFrame(Rubish.type + '_' + Rubish.id);
 
-        this.node.addChild(rubishNode);
+
+        cc.find('Canvas/BaseView/Rubishes').addChild(rubishNode);
+        // this.node.addChild(rubishNode);
         //加入暂存栈
         this.rubishStack.push(Rubish);
 
@@ -271,30 +286,26 @@ cc.Class({
         var textSprite = textNode.getComponent(cc.Sprite);
         textSprite.spriteFrame = this.iconsAtlas.getSpriteFrame("speedUp");
         // console.log(textLabel);
-        textNode.x = 750;
+        textNode.x = 800;
         textNode.y = 1000;
         textNode.scaleX = 1.5;
         textNode.scaleY = 1.5;
         //移动
         textNode.runAction(
             cc.sequence(
-                cc.moveBy(1, cc.v2(-textNode.x / 2, 0)),
+                cc.moveBy(0.5, cc.v2(-textNode.x / 2, 0)),
                 cc.moveBy(1, cc.v2(0, 0)),
-                cc.moveBy(1, cc.v2(-500, 0)),
+                cc.moveBy(0.5, cc.v2(-550, 0)),
                 cc.callFunc(callBack)
             )
         );
 
         this.node.addChild(textNode);
     },
-    //分数逻辑函数
-    scoreAction() {
-    },
-
     getLevel() {
         if (this.score < 10)
             return 0
-        if (this.score < 30)
+        else if (this.score < 30)
             return 1;
         else
             return 2;
@@ -328,45 +339,6 @@ cc.Class({
                 message: 'clear'
             });
         }
-    },
-    initUserInfoButton() {
-        // 微信授权，此代码来自Cocos官方
-        if (typeof wx === 'undefined') {
-            return;
-        }
-
-        let systemInfo = wx.getSystemInfoSync();
-        let width = systemInfo.windowWidth;
-        let height = systemInfo.windowHeight;
-        let button = wx.createUserInfoButton({
-            type: 'text',
-            text: '',
-            style: {
-                left: 0,
-                top: 0,
-                width: width,
-                height: height,
-                lineHeight: 40,
-                backgroundColor: '#00000000',
-                color: '#00000000',
-                textAlign: 'center',
-                fontSize: 10,
-                borderRadius: 4
-            }
-        });
-
-        button.onTap((res) => {
-            if (res.userInfo) {
-                // 可以在这里获取当前玩家的个人信息，如头像、微信名等。
-                console.log('授权成功！');
-            }
-            else {
-                console.log('授权失败！');
-            }
-
-            button.hide();
-            button.destroy();
-        });
     },
 
     createAlert: function (id, type) {
