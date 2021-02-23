@@ -1,2 +1,2 @@
-# Sorting
-基于Cocos Creator的垃圾分类小游戏
+# hello-world
+Hello world new project template.
