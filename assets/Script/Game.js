@@ -28,7 +28,7 @@ cc.Class({
 
     onLoad() {
         // 获取授权
-        this.initUserInfoButton();
+        // this.initUserInfoButton();
         this.wxSubContextView.active = false;
         this.restartbtn.active = false;
         //生成垃圾的速率(ms)
