@@ -214,10 +214,7 @@ cc.Class({
                         then.gameOver();
                         then.createAlert(Rubish.id, Rubish.type);
                     }
-                    else {
-                        then.hearts.pop().destroy();
-                    }
-
+                    then.hearts.pop().destroy();
 
                 }
 
