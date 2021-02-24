@@ -29,6 +29,7 @@ cc.Class({
     onLoad() {
         // 获取授权
         // this.initUserInfoButton();
+        // this.visible = true;
         this.wxSubContextView.active = false;
         this.restartbtn.active = false;
         //生成垃圾的速率(ms)
@@ -39,7 +40,6 @@ cc.Class({
         this.rubishY0 = 1200;
         this.rubishXInte = 187.5;
         this.rubishStack = new Array();
-
         //score组件
         this.scoreNode = cc.find('Canvas/BaseView/Score');
         this.scoreLabel = this.scoreNode.getComponent(cc.Label);
@@ -49,7 +49,23 @@ cc.Class({
         //开始游戏
         this.gameUp();
 
+
+        var then = this;
+        document.addEventListener("visibilitychange", function (e) {
+            if (!then.playing)
+                return;
+            if (e.hidden || document.hidden) {
+                clearInterval(then.genarating);
+            } else {
+                then.genarating = setInterval(then.producer, then.rate);
+            }
+        });
+
     },
+
+    // visibilityChange(e) {
+
+    // },
 
     gameUp() {
 
@@ -73,7 +89,7 @@ cc.Class({
     gameOver() {
 
         if (this.gameOverTesting) return;
-
+        this.playing = false;
         //清除垃圾生成器
         clearInterval(this.genarating);
         //暂停所有动作
@@ -100,9 +116,7 @@ cc.Class({
         var preRate = 4000;
         this.spawnARubish(speed);
 
-        this.genarating = setInterval(producer, this.rate);
-
-        function producer() {
+        this.producer = function producer() {
             //Speed is in range 200 to 400
             speed = 200 + then.getLevel() * 50;
             //Rate is in range 2000ms to 4000ms
@@ -116,13 +130,15 @@ cc.Class({
 
                 then.movingText(function () {
                     then.spawnARubish(speed);
-                    then.genarating = setInterval(producer, then.rate);
+                    then.genarating = setInterval(then.producer, then.rate);
                 });
             } else {
                 then.spawnARubish(speed);
             }
 
         }
+
+        this.genarating = setInterval(this.producer, this.rate);
     },
 
     //生成一个垃圾节点并添加至场景
