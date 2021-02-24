@@ -4,6 +4,19 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>Index.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,254},{375,667}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{375,667}}</string>
+                <key>sourceSize</key>
+                <string>{375,667}</string>
+            </dict>
             <key>background.png</key>
             <dict>
                 <key>frame</key>
@@ -11,7 +24,7 @@
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{250,444}}</string>
                 <key>sourceSize</key>
@@ -25,9 +38,9 @@
             <key>realTextureFileName</key>
             <string>window.png</string>
             <key>size</key>
-            <string>{256,512}</string>
+            <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9d8f4e3604f96e85f07a89017198fc56$</string>
+            <string>$TexturePacker:SmartUpdate:3462c28c5b2950de7e6c47652576cdd0$</string>
             <key>textureFileName</key>
             <string>window.png</string>
         </dict>

@@ -20,7 +20,7 @@
             <key>bubble.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{132,520},{115,115}}</string>
+                <string>{{284,520},{115,115}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -69,6 +69,19 @@
                 <key>sourceSize</key>
                 <string>{528,284}</string>
             </dict>
+            <key>ring.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{132,520},{150,150}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{150,150}}</string>
+                <key>sourceSize</key>
+                <string>{150,150}</string>
+            </dict>
             <key>speedUp.png</key>
             <dict>
                 <key>frame</key>
@@ -92,7 +105,7 @@
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fc6152d5f5ffeaaff99cc68912bd586e$</string>
+            <string>$TexturePacker:SmartUpdate:4a20d1f21d67f6677f24810d483a3495$</string>
             <key>textureFileName</key>
             <string>Icons.png</string>
         </dict>

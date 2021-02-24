@@ -3,18 +3,40 @@
   "uuid": "d9831cd2-9ff5-4340-a5f6-c73f9c256b1f",
   "rawTextureUuid": "26138f7b-d4ee-46ee-8384-f0d4e8f32f67",
   "size": {
-    "width": 256,
-    "height": 512
+    "width": 512,
+    "height": 1024
   },
   "type": "Texture Packer",
   "subMetas": {
+    "Index.png": {
+      "ver": "1.0.4",
+      "uuid": "cc544ce1-4f7a-45eb-8db0-a55e2bd7038c",
+      "rawTextureUuid": "26138f7b-d4ee-46ee-8384-f0d4e8f32f67",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 254,
+      "width": 375,
+      "height": 667,
+      "rawWidth": 375,
+      "rawHeight": 667,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
+    },
     "background.png": {
       "ver": "1.0.4",
       "uuid": "ff4bd022-1f99-4ba6-9179-de0b7a4451b1",
       "rawTextureUuid": "26138f7b-d4ee-46ee-8384-f0d4e8f32f67",
       "trimType": "auto",
       "trimThreshold": 1,
-      "rotated": false,
+      "rotated": true,
       "offsetX": 0,
       "offsetY": 0,
       "trimX": 2,

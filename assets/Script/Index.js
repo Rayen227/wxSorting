@@ -13,10 +13,26 @@ cc.Class({
 
     onLoad() {
         this.initUserInfoButton();
-        this.startbtn.active = false
-        this.wxSubContextView.active = false
-        var onePage = cc.instantiate(this.onePagePrefab);
-        onePage.getComponent("OnePage").rendering(0);
+        this.startbtn.active = false;
+        this.wxSubContextView.active = false;
+
+
+        this.AnimationON();
+    },
+
+    //播放动画
+    AnimationON() {
+        var ring = cc.find('Canvas/BaseView/showrankbtn/Ring');
+        console.log(ring);
+        var duration = 4;
+        ring.runAction(cc.repeatForever(cc.sequence(
+            cc.scaleTo(duration / 2, 3, 3),
+            cc.scaleTo(duration / 2, 1, 1),
+        )));
+        ring.runAction(cc.repeatForever(cc.sequence(
+            cc.fadeIn(duration / 2),
+            cc.fadeOut(duration / 2),
+        )));
     },
 
     startGame() {
