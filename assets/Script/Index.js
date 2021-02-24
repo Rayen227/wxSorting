@@ -61,8 +61,8 @@ cc.Class({
                         type: 'text',
                         text: '点击授权',
                         style: {
-                            left: 125,
-                            top: 300,
+                            left: 115,
+                            top: 550,
                             width: 150,
                             height: 50,
                             lineHeight: 50,
