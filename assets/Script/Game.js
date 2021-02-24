@@ -290,7 +290,6 @@ cc.Class({
         this.rubishStack.push(Rubish);
 
 
-        console.log(Rubish.type);
 
 
     },
@@ -301,7 +300,6 @@ cc.Class({
         textNode.addComponent(cc.Sprite);
         var textSprite = textNode.getComponent(cc.Sprite);
         textSprite.spriteFrame = this.iconsAtlas.getSpriteFrame("speedUp");
-        // console.log(textLabel);
         textNode.x = 800;
         textNode.y = 1000;
         textNode.scaleX = 1.5;
@@ -330,19 +328,14 @@ cc.Class({
     //弹出排行榜函数
     showRanks() {
         if (typeof wx === 'undefined') {
-            console.log('showRanks')
             return;
         }
-        console.log("弹出排行榜函数" + this.score.toString())
-        console.log(this.wxSubContextView.active)
         if (!this.wxSubContextView.active) {
             // 设置容器可见
             this.wxSubContextView.active = true;
-            console.log("弹出排行榜函数" + this.score.toString())
             // 设置随机数(把这个当做玩家每局结算时的分数)
             //let score = Math.round(Math.random()*10);
             let score = this.score;
-            console.log(score);
             // 发送结算分数到开放域
             wx.getOpenDataContext().postMessage({
                 message: score
@@ -362,7 +355,6 @@ cc.Class({
         var spritename = type.toString() + '_' + id.toString();
         this.node.addChild(node);
         var myAlert = node.getComponent('alert')
-        console.log(id, type)
         myAlert.rubish_sprite.spriteFrame = this.rubishAtlas.getSpriteFrame(spritename);
         var typename = ['干垃圾', '可回收物', '湿垃圾', "有害垃圾"];
         myAlert.mytip.string = typename[type];
@@ -376,7 +368,6 @@ cc.Class({
         this.showRanks();
         this.restartbtn.active = false;
         this.gameUp();
-        // cc.director.loadScene("Index");
 
     },
     returnIndex() {

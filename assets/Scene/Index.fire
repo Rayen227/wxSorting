@@ -171,7 +171,7 @@
       "array": [
         0,
         0,
-        424.18447478545613,
+        423.7841186831414,
         0,
         0,
         0,
@@ -1107,7 +1107,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "534d4d4d-2679-4473-8b3a-2b1e818da8ae"
+      "__uuid__": "ed09fe62-224b-476d-93b1-fa7840c60118"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1120,7 +1120,9 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "6821b44a-9813-4380-98a6-12b3188044b7"
+    },
     "_id": "f32TflsFBDi5SEY1HpZmDB"
   },
   {
@@ -1216,23 +1218,13 @@
       "a": 200
     },
     "_N$normalSprite": {
-      "__uuid__": "534d4d4d-2679-4473-8b3a-2b1e818da8ae"
+      "__uuid__": "ed09fe62-224b-476d-93b1-fa7840c60118"
     },
-    "_N$pressedSprite": {
-      "__uuid__": "534d4d4d-2679-4473-8b3a-2b1e818da8ae"
-    },
-    "pressedSprite": {
-      "__uuid__": "534d4d4d-2679-4473-8b3a-2b1e818da8ae"
-    },
-    "_N$hoverSprite": {
-      "__uuid__": "534d4d4d-2679-4473-8b3a-2b1e818da8ae"
-    },
-    "hoverSprite": {
-      "__uuid__": "534d4d4d-2679-4473-8b3a-2b1e818da8ae"
-    },
-    "_N$disabledSprite": {
-      "__uuid__": "534d4d4d-2679-4473-8b3a-2b1e818da8ae"
-    },
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 21
     },
@@ -1259,9 +1251,7 @@
     "wxSubContextView": {
       "__id__": 8
     },
-    "onePagePrefab": {
-      "__uuid__": "dbe65202-cdbe-48f0-a1e1-64f96062028b"
-    },
+    "onePagePrefab": null,
     "startbtn": {
       "__id__": 10
     },

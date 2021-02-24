@@ -23,7 +23,6 @@ cc.Class({
     //播放动画
     AnimationON() {
         var ring = cc.find('Canvas/BaseView/showrankbtn/Ring');
-        console.log(ring);
         var duration = 4;
         ring.runAction(cc.repeatForever(cc.sequence(
             cc.scaleTo(duration / 2, 3, 3),
@@ -48,7 +47,6 @@ cc.Class({
 
         window.wx.getSetting({
             success(res) {
-                console.log(res.authSetting);
                 if (res.authSetting["scope.userInfo"]) {
                     console.log("用户已授权");
                     _this.startbtn.active = true
@@ -96,7 +94,6 @@ cc.Class({
     //弹出排行榜函数
     showRanks() {
         if (typeof wx === 'undefined') {
-            console.log('showRanks')
             return;
         }
         if (!this.wxSubContextView.active) {
@@ -105,7 +102,6 @@ cc.Class({
             // 设置随机数(把这个当做玩家每局结算时的分数)
             //let score = Math.round(Math.random()*10);
             let score = 0
-            console.log(score);
             // 发送结算分数到开放域
             wx.getOpenDataContext().postMessage({
                 message: score
