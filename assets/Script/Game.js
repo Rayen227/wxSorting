@@ -77,7 +77,7 @@ cc.Class({
 
         this.scoreLabel.string = "0";
         this.score = 0;
-        this.score = 69;
+        // this.score = 69;
         //爱心
         this.hearts = [];
         //初始化爱心
