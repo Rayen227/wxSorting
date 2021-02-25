@@ -74,7 +74,8 @@ cc.Class({
                 this.rubishStack[i].node.destroy();
         }
         this.rubishStack = [];
-
+        this.playing = true;
+        this.rate = 4000;
         this.scoreLabel.string = "0";
         this.score = 0;
         // this.score = 69;
@@ -358,7 +359,7 @@ cc.Class({
             this.wxSubContextView.active = true;
             // 设置随机数(把这个当做玩家每局结算时的分数)
             //let score = Math.round(Math.random()*10);
-            let score = this.score;
+            let score = this.score === 0 ? -1 : this.score;
             // 发送结算分数到开放域
             wx.getOpenDataContext().postMessage({
                 message: score

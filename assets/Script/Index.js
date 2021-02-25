@@ -35,6 +35,13 @@ cc.Class({
     },
 
     startGame() {
+        this.wxSubContextView.active = false;
+        if (typeof wx !== "undefined") {
+            wx.getOpenDataContext().postMessage({
+                message: 'clear'
+            });
+        }
+
         cc.director.loadScene("MainView");
     },
 
