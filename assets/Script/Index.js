@@ -101,7 +101,7 @@ cc.Class({
             this.wxSubContextView.active = true;
             // 设置随机数(把这个当做玩家每局结算时的分数)
             //let score = Math.round(Math.random()*10);
-            let score = 0
+            let score = -1;
             // 发送结算分数到开放域
             wx.getOpenDataContext().postMessage({
                 message: score

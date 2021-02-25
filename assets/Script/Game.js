@@ -77,6 +77,7 @@ cc.Class({
 
         this.scoreLabel.string = "0";
         this.score = 0;
+        this.score = 69;
         //爱心
         this.hearts = [];
         //初始化爱心
@@ -239,6 +240,21 @@ cc.Class({
                     then.score++;
                     then.scoreLabel.string = then.score.toString();
 
+                    //播放动画
+                    var burstNode = cc.instantiate(then.burstPrefab);
+                    var burstAnim = burstNode.getComponent(cc.Animation);
+                    burstAnim.play("Burst");
+                    burstNode.x = Rubish.node.x;
+                    burstNode.y = Rubish.node.y;
+                    burstNode.scaleX = 1.5;
+                    burstNode.scaleY = 1.5;
+
+                    burstAnim.on('finished', function () {
+                        burstNode.destroy();
+                        burstNode = null;
+                    });
+                    then.node.addChild(burstNode);
+
                     then.scoreNode.color = new cc.color(
                         Math.floor(Math.random() * 150),
                         Math.floor(Math.random() * 150),
@@ -248,6 +264,24 @@ cc.Class({
                 } else {
 
                     then.heart--;
+
+                    //播放动画
+                    var wrongNode = new cc.Node;
+                    wrongNode.addComponent(cc.Sprite);
+                    wrongNode.getComponent(cc.Sprite).spriteFrame = then.iconsAtlas.getSpriteFrame('wrong');
+                    wrongNode.x = Rubish.node.x;
+                    wrongNode.y = Rubish.node.y;
+                    then.node.addChild(wrongNode);
+
+                    wrongNode.runAction(cc.sequence(
+                        cc.fadeOut(0.5),
+                        cc.callFunc(function () {
+                            wrongNode.destroy();
+                        }),
+                    ));
+                    wrongNode.runAction(cc.scaleTo(0.5, 1.2, 1.2));
+
+
                     if (then.hearts.length <= 1) {
                         then.gameOver();
                         then.createAlert(Rubish.id, Rubish.type);
@@ -258,20 +292,7 @@ cc.Class({
 
                 }
 
-                //播放动画
-                var burstNode = cc.instantiate(then.burstPrefab);
-                var burstAnim = burstNode.getComponent(cc.Animation);
-                burstAnim.play("Burst");
-                burstNode.x = Rubish.node.x;
-                burstNode.y = Rubish.node.y;
-                burstNode.scaleX = 1.5;
-                burstNode.scaleY = 1.5;
 
-                burstAnim.on('finished', function () {
-                    burstNode.destroy();
-                    burstNode = null;
-                });
-                then.node.addChild(burstNode);
 
                 Rubish.node.destroy();
                 Rubish = null;
@@ -321,8 +342,10 @@ cc.Class({
             return 0
         else if (this.score < 30)
             return 1;
-        else
+        else if (this.score < 70)
             return 2;
+        else
+            return 3;
     },
 
     //弹出排行榜函数

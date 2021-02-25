@@ -7,7 +7,7 @@
             <key>btn.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{406,2},{92,94}}</string>
+                <string>{{406,104},{92,94}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>heart.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{455,96},{43,38}}</string>
+                <string>{{455,198},{43,38}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>speedUp.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{406,96},{141,47}}</string>
+                <string>{{406,198},{141,47}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -94,6 +94,19 @@
                 <string>{{0,0},{141,47}}</string>
                 <key>sourceSize</key>
                 <string>{141,47}</string>
+            </dict>
+            <key>wrong.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{406,2},{100,100}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{100,100}}</string>
+                <key>sourceSize</key>
+                <string>{100,100}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -105,7 +118,7 @@
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4a20d1f21d67f6677f24810d483a3495$</string>
+            <string>$TexturePacker:SmartUpdate:8e497d3921bc810a45342761bf290752$</string>
             <key>textureFileName</key>
             <string>Icons.png</string>
         </dict>
